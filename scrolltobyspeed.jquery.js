@@ -1,1 +1,33 @@
-!function(a){a.fn.scrollToBySpeed=function(b){var c,d,e,f,g=a("html,body"),h=a(window);return c={speed:1e3,offset:0,mode:"chain"},d=a.extend(c,b),e=Math.abs(h.scrollTop()-a(this).offset().top),f=e/d.speed*1e3,g.animate({scrollTop:a(this).offset().top-d.offset},f),"chain"!==d.mode?f:this}}(jQuery);
+(function ($) {
+  $.fn.scrollToBySpeed = function (args) {
+    var defaults
+      , settings
+      , $d = $('html,body')
+      , $w = $(window)
+      , distance
+      , duration
+      ;
+ 
+    defaults = {
+      speed: 1600
+    , offset: 0
+    , mode: 'chain'
+    , easing: 'swing'
+    };
+ 
+    settings = $.extend(defaults,args);
+ 
+    distance = Math.abs( $w.scrollTop() - $(this).offset().top );
+    duration = ( distance / settings.speed ) * 1000;
+
+    $d.animate({
+      scrollTop: $(this).offset().top - settings.offset
+    }, duration, settings.easing);
+ 
+    if ( settings.mode !== 'chain' ) {
+      return duration;
+    }
+    
+    return this;
+  };
+}(jQuery));
