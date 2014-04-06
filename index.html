@@ -101,11 +101,13 @@
                 $('[id^="time"]').on('click', function () {
                     $('html,body').animate({
                         scrollTop: $(this).parents('p').next().offset().top
-                    }, 1000);
+                    }, 1000, 'linear');
                 });
 
                 $('[id^="speed"]').on('click', function () {
-                    $(this).parents('p').next().scrollToBySpeed();
+                    $(this).parents('p').next().scrollToBySpeed({
+                        easing: 'linear'
+                    });
                 });
             });
         </script>
